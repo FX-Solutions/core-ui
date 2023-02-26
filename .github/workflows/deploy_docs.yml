@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-22.04
     environment:
       name: core-ui-docs
@@ -29,6 +29,36 @@ jobs:
         run: |
           yarn install
           yarn run storybook:build:docs
-      - name: Deploy 🚀
+      - name: Upload Artifacts ⛅
+        uses: actions/upload-pages-artifact@v1
+        with:
+          name: docs
+          path: docs
+          if-no-files-found: error
+
+  # Deploy job
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: core-ui-docs
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: docs
+          path: .
+      - uses: actions/configure-pages@v1
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: .
+      - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v1
