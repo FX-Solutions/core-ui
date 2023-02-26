@@ -30,7 +30,7 @@ jobs:
           yarn install
           yarn run storybook:build:docs
       - name: Upload Artifacts ⛅
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v1
         with:
           name: docs
           path: docs
@@ -64,3 +64,5 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v1
+        with: 
+          
