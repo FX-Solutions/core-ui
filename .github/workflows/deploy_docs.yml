@@ -51,12 +51,13 @@ jobs:
     # Specify runner + deployment step
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/download-artifact@master
+      - name: Download Artifacts 🌐
+        uses: actions/download-artifact@master
         with:
           name: docs
           path: .
-      - uses: actions/configure-pages@v1
-      - uses: actions/upload-pages-artifact@v1
+      - name: Upload Page 🆙
+        uses: actions/upload-pages-artifact@v1
         with:
           path: .
       - name: Deploy to GitHub Pages 🚀
