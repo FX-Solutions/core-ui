@@ -20,6 +20,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix",
     "format": "prettier --write .",
+    "dev": "yarn storybook:dev",
     "storybook:dev": "start-storybook -p 6006",
     "storybook:build": "build-storybook -o storybook_canvas",
     "storybook:build:docs": "build-storybook --docs -o docs",
